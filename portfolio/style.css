@@ -39,6 +39,10 @@ body {
   padding-right: 50px;
 }
 
+.section:last-of-type {
+  min-height: 0px;
+}
+
 #about {
   background-color: rgba(0,0,255,0.05);
 }
@@ -55,7 +59,7 @@ body {
   border-radius: 50%;
   max-width: 200px;
   margin-left: 10px;
-  opacity: 0.8;
+  opacity: 0.5;
 
   -webkit-transition: all 1s ease;
    -moz-transition: all 1s ease;
@@ -66,6 +70,7 @@ body {
 
 #profilepicture:hover {
   transform: scale(1.1);
+  opacity: 1;
 }
 
 .portfolioimg {
@@ -248,7 +253,7 @@ http://work.smarchal.com/twbscolor/css/3231334468adecf0f1ecdbff0
 .social-button.linkedin:before {
   background-color: #0077b5;
 }
-.social-button.linked .fa {
+.social-button.linkedin .fa {
   color: #333;
 }
 .social-button:focus:before, .social-button:hover:before {

@@ -11,6 +11,11 @@ $(document).ready(function() {
         var target = this.hash;
         scrollToAnchor(target);
     });
+
+    /** Add links on portfolioimg */
+    $('.portfolioimg').each(function() {
+        $(this).wrap("<a href='http://www.google.com' target='_blank'></a>")
+    });
 });
 
 /* Set appropriate layout on menu items by toggling selected state */
