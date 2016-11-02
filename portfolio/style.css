@@ -54,6 +54,18 @@ body {
 #profilepicture {
   border-radius: 50%;
   max-width: 200px;
+  margin-left: 10px;
+  opacity: 0.8;
+
+  -webkit-transition: all 1s ease;
+   -moz-transition: all 1s ease;
+     -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+        transition: all 1s ease;
+}
+
+#profilepicture:hover {
+  transform: scale(1.1);
 }
 
 .portfolioimg {
