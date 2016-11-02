@@ -56,6 +56,21 @@ body {
   max-width: 200px;
 }
 
+.portfolioimg {
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  -webkit-transition: all 0,3s ease;
+     -moz-transition: all 0,3s ease;
+       -o-transition: all 0,3s ease;
+      -ms-transition: all 0,3s ease;
+          transition: all 0,3s ease;
+}
+
+.portfolioimg:hover {
+  -webkit-filter: opacity(0.5);
+}
+
 /**
 Navbar styles, generated wtih TWBSColor
 http://work.smarchal.com/twbscolor/css/3231334468adecf0f1ecdbff0
