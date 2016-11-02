@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-visible/1.2.0/jquery.visible.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
     <script src="script.js"></script>
 </head>
 
@@ -84,14 +85,47 @@
         </div>
     </div>
     <div id="contact" class="container section">
-        CONTACT
-        <div class="social-buttons">
-            <a href="#" class="social-button linkedin"><i class="fa fa-linkedin"></i></a>
-            <a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-            <a href="#" class="social-button google"><i class="fa fa-google"></i></a>
-            <a href="#" class="social-button github"><i class="fa fa-github"></i></a>
+        <div class="social-buttons row">
+          <span class="col-lg-5 col-lg-offset-2 col-sm-6 col-md-offset-2 col-md-5">
+            <span class="col-sm-6"><a href="#" class="social-button"><i class="fa fa-linkedin"></i></a></span>
+            <span class="col-sm-6"><a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a></span>
+          </span>
+          <span class="col-lg-5 col-sm-6 col-md-5">
+            <span class="col-sm-6"><a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a></span>
+            <span class="col-sm-6" ><a href="#" class="social-button github"><i class="fa fa-github"></i></a></span>
+          </span>
         </div>
+
+
+        <form data-toggle="validator" class="form-horizontal" role="form" action="#contact">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="First and Last Name" value="" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Email:</label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value="" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message" class="col-sm-2 control-label" required>Message: </label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" rows="20" name="message" placeholder="Your message" required></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </form>
     </div>
 
 </body>

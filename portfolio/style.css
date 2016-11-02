@@ -48,7 +48,7 @@ body {
 }
 
 #contact {
-  background-color: rgba(0,255,0,0.05);
+  background-color: rgba(0,0,0,0.05);
 }
 
 #profilepicture {
@@ -157,23 +157,10 @@ http://work.smarchal.com/twbscolor/css/3231334468adecf0f1ecdbff0
   }
 }
 
-/** Social buttons
-from http://codepen.io/chrisdothtml/pen/azPYqq
-**/
-/* Reset */
-@import url(//codepen.io/chrisdothtml/pen/ojLzJK.css);
+/** Social buttons **/
 .social-buttons {
-  height: 90px;
-  margin: auto;
-  font-size: 0;
-  text-align: center;
-  /*position: absolute;*/
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  padding-bottom: 50px;
 }
-
 .social-button {
   display: inline-block;
   background-color: #fff;
@@ -185,11 +172,34 @@ from http://codepen.io/chrisdothtml/pen/azPYqq
   position: relative;
   overflow: hidden;
   opacity: .99;
+  margin-bottom: 10px;
   border-radius: 28%;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05);
   -webkit-transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
   transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
 }
+
+@media (max-width: 767px) {
+  .social-button {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-button {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .social-buttons [class*="col-"] {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+}
+
 .social-button:before {
   content: '';
   background-color: #000;
