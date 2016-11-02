@@ -12,9 +12,9 @@ body {
   z-index: -1;
 
   display: block;
-  background-image: url('https://pexels.imgix.net/photos/7357/startup-photos.jpg?dl&fit=crop&w=1920&h=1280');
+  background-image: url('https://cdn.elegantthemes.com/blog/wp-content/uploads/2013/09/bg-5-full.jpg');
   width: 2000px;
-  height: 800px;
+  height: 2000px;
 
   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
@@ -24,7 +24,6 @@ body {
 }
 
 #content {
-  padding-top: 85px;
   min-height: 2000px;
 }
 
@@ -34,21 +33,28 @@ body {
 }
 
 .section {
+  padding-top: 90px; /* header + some space */
   min-height: 2000px;
-}
-
-#home {
-  background-color: rgba(0,0,255,0.2);
+  color: white;
+  padding-right: 50px;
 }
 
 #about {
-  background-color: rgba(255,0,0,0.2);
+  background-color: rgba(0,0,255,0.05);
+}
+
+#portfolio {
+  background-color: rgba(255,0,0,0.05);
 }
 
 #contact {
-  background-color: rgba(0,255,0,0.2);
+  background-color: rgba(0,255,0,0.05);
 }
 
+#profilepicture {
+  border-radius: 50%;
+  max-width: 200px;
+}
 
 /**
 Navbar styles, generated wtih TWBSColor
@@ -200,6 +206,12 @@ from http://codepen.io/chrisdothtml/pen/azPYqq
   background-color: #6cc644;
 }
 .social-button.github .fa {
+  color: #333;
+}
+.social-button.linkedin:before {
+  background-color: #0077b5;
+}
+.social-button.linked .fa {
   color: #333;
 }
 .social-button:focus:before, .social-button:hover:before {

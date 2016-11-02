@@ -16,7 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="style.css" rel="stylesheet">
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="script.js"></script>
 </head>
@@ -37,8 +37,8 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a class="active" href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -46,15 +46,35 @@
     </nav>
 
     <div id="background"></div>
-    <div id="home" class="container section">
-        content1
-    </div>
     <div id="about" class="container section">
-        content2
+        <div class="row">
+            <div class="col-md-3">
+                <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/039/2be/34d8e84.jpg" id="profilepicture" />
+            </div>
+            <div class="col-md-8" style="margin-left: 20px;">
+                <h1><strong>gdusart</strong></h1>
+                <h2><p>Java lead developer with 10+ years experience</p></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                <p>Grégory directly started his career on a great project for the Belgian Government involving high exigencies and leading-edge technologies such as EJB3, Spring framework, Hibernate and Oracle</p>
+                <p>On this project, he was in charge of the development of major components, including unit testing and documentation. He then got a relevant project experience in java technologies and proved himself as a good team worker.</p>
+                <p>Since November 2007, he has been successfully working for major Luxembourgish partners such as the Bank of Tokyo Mitsubishi, Price Waterhouse Coopers, Eurostat and the European Parliament.</p>
+                <p>Lately, he has been in charge of the evolving maintenance of critical applications for these Luxembourgish partners and had to cope with tight delays and high client pressure. He as well reinforced his technical experience on technologies
+                    such as Spring, Struts, Hibernate, EJB and, more globally, J2EE-related technologies.</p>
+
+                <p>Specialties: Java, J2EE, Spring, Struts, Hibernate, GWT, EJB, J2EE-related technologies</p>
+            </div>
+        </div>
+    </div>
+    <div id="portfolio" class="container section">
     </div>
     <div id="contact" class="container section">
-      CONTACT
+        CONTACT
         <div class="social-buttons">
+            <a href="#" class="social-button linkedin"><i class="fa fa-linkedin"></i></a>
             <a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
             <a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
             <a href="#" class="social-button google"><i class="fa fa-google"></i></a>
