@@ -10,7 +10,6 @@ html, body {
     background-image: url(img/background.jpg);
 }
 
-
 .top {
     height: 10%;
 }
@@ -92,13 +91,11 @@ html, body {
   padding-top:20%;
   padding-right: 20%;
   font-size: 1.3vw;
-  height: 10%;
+  margin-bottom: 10%;
 }
 
 #author {
-  padding-left:20;
   text-align: center;
-  padding-top: 50%;
   font-weight: bold;
   font-size: 1.2vw;
 }

@@ -1,4 +1,5 @@
 var serviceUrl = "https://crossorigin.me/http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=";
+var twitterUrl = "https://twitter.com/intent/tweet";
 /*var serviceUrl = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=";*/
 
 function setLoading(loading) {
@@ -13,7 +14,7 @@ function loadRandomQuote() {
     setLoading(true);
 
     /** For dev purpose */
-    if (location.protocol === "file:") {
+    if (location.protocol === "file:" && false) {
       setTimeout(function () {
         setQuote("Confucius", "Exige beaucoup de toi-même et attends peu des autres. Ainsi beaucoup d'ennuis te seront épargnés.Exige beaucoup de toi-même et attends peu des autres.Exige beaucoup de toi-même et attends peu des autres.");
         setLoading(false);
@@ -39,11 +40,28 @@ function setQuote(author, quote) {
     $("#author").text(author);
 }
 
+function getCurrentQuote() {
+  return $("#quote").text();
+}
+
+function getCurrentAuthor() {
+  return $("#author").text();
+}
+
+function tweetQuote() {
+    var params = { text: getCurrentQuote() + " - " + getCurrentAuthor(), hashtags: "gdusart@freebootcamp"};
+    var win = window.open(twitterUrl + "?" + $.param(params), "_blank");
+}
+
 $(function() {
     $.ajaxSetup({ cache: false });
 
     loadRandomQuote();
     $("#newquote").click(function(event) {
         loadRandomQuote();
+    });
+
+    $("#twitterLink").click(function() {
+      tweetQuote();
     });
 });
