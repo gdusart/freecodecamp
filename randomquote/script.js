@@ -1,8 +1,10 @@
 var serviceUrl = "https://crossorigin.me/http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=";
 
 function setLoading(loading) {
-    $("#newquote > i").toggleClass("fa-spin", loading ? true : false);
+    $("#newquote > i").toggleClass("fa-spin", loading);
     $("#center").fadeTo(1500, loading ? 0.5 : 1);
+
+    $("button").prop("disabled", loading);
 }
 
 function loadRandomQuote() {
@@ -16,7 +18,7 @@ function loadRandomQuote() {
             setLoading(false);
         })
         .fail(function(response) {
-            alert("error : " + response.statusText);
+            setQuote("", "An error has occured");
             setLoading(false);
         });
 
@@ -36,7 +38,7 @@ function setQuote(author, quote) {
 
 $(function() {
     $.ajaxSetup({ cache: false });
-    
+
     loadRandomQuote();
     $("#newquote").click(function(event) {
         loadRandomQuote();

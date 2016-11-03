@@ -1,6 +1,6 @@
 html, body {
     height: 100%;
-    background-image: url(http://godlywoodstudio.org/wp-content/uploads/2014/11/Grey-website-background.png);
+    background-image: url(img/background.jpg);
 }
 
 * {
@@ -72,3 +72,5 @@ html, body {
 .button:hover {
   color: black;
 }
+
+@import url(style-resp.css);
