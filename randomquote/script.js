@@ -24,8 +24,8 @@ function loadRandomQuote() {
     else {
       $.getJSON(serviceUrl)
           .done(function(data) {
-              var quote = $(data[0].content).text();
-              setQuote(data[0].title, quote);
+              var quote = $(data[0].content).text(); /* inside a <p> tag */
+              setQuote($('<p/>').html(data[0].title).text(), quote); /* html-encoded string */
               setLoading(false);
           })
           .fail(function(response) {

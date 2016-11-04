@@ -92,6 +92,20 @@ and (min-aspect-ratio: 1440/600)  {
     padding-bottom: 24%;
     margin-left: 38%; /* center: (100 - width)/2 */
   }
+
+  /* Make text mall for long quotes */
+  #quote {
+    font-size: 1vw;
+  }
+
+  #author {
+    font-size: 0.8vw;
+  }
+
+  .button {
+    font-size: 3vw;
+  }
+
 }
 
 /* Portrait mode */
