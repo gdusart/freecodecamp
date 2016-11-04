@@ -1,5 +1,5 @@
 var twitterUrl = "https://twitter.com/intent/tweet";
-var serviceUrl = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&_jsonp=?";
+var serviceUrl = "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&_jsonp=?";
 
 function setLoading(loading) {
     $("button").prop("disabled", loading);
