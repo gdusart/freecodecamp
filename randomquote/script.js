@@ -55,10 +55,12 @@ $(function() {
 
     loadRandomQuote();
     $("#newquote").click(function(event) {
+        event.preventDefault();
         loadRandomQuote();
     });
 
     $("#twitterLink").click(function() {
+      event.preventDefault();
       tweetQuote();
     });
 });
