@@ -84,27 +84,3 @@ html, body {
   font-weight: bold;
   font-size: 1.2vw;
 }
-
-/* Portrait mode */
-@media only screen
-and (orientation : portrait) {
-      /* css rules */
-      #circle {
-        /* Create a circle: width MUST match padding-bottom ! */
-        width: 60%;
-        padding-bottom: 60%;
-        margin-left: 20%; /* center: (100 - width)/2 */
-      }
-
-      #quote {
-        font-size: 2.5vw;
-      }
-
-      #author {
-        font-size: 2.3vw;
-      }
-
-      .button {
-        font-size: 8vw;
-      }
-}
