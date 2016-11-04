@@ -1,6 +1,5 @@
-var serviceUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?";
 var twitterUrl = "https://twitter.com/intent/tweet";
-/*var serviceUrl = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=";*/
+var serviceUrl = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&_jsonp=?";
 
 function setLoading(loading) {
     $("button").prop("disabled", loading);
@@ -22,7 +21,8 @@ function loadRandomQuote() {
     else {
       $.getJSON(serviceUrl)
           .done(function(data) {
-              setQuote(data.quoteAuthor, data.quoteText);
+              var quote = $(data[0].content).text(); /* inside a <p> tag */
+              setQuote($('<p/>').html(data[0].title).text(), quote); /* html-encoded string */
               setLoading(false);
           })
           .fail(function(response) {
