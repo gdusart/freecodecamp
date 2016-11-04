@@ -21,7 +21,6 @@ html, body {
 }
 .bottom {
   height: 25%;
-  overflow: hidden;
 }
 
 .middlecenter {
@@ -84,3 +83,41 @@ html, body {
   font-weight: bold;
   font-size: 1.2vw;
 }
+
+@media  only screen
+and (min-aspect-ratio: 1440/600)  {
+  /* Very wide screen, make circle smaller */
+  #circle {
+    width: 24%;
+    padding-bottom: 24%;
+    margin-left: 38%; /* center: (100 - width)/2 */
+  }
+}
+
+/* Portrait mode */
+@media  only screen
+and (orientation : portrait) {
+      /* lot of remaining space below, make circle bigger */
+      #circle {
+        /* Create a circle: width MUST match padding-bottom ! */
+        width: 60%;
+        padding-bottom: 60%;
+        margin-left: 20%; /* center: (100 - width)/2 */
+      }
+
+      /* make text bigger */
+      #quote {
+        font-size: 2.5vw;
+      }
+
+      /* make text bigger */
+      #author {
+        font-size: 2.3vw;
+      }
+
+      /* make buttons bigger */
+      .button {
+        font-size: 8vw;
+      }
+}
+*/
