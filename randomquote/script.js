@@ -1,12 +1,10 @@
-var serviceUrl = "https://crossorigin.me/http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=";
+var serviceUrl = "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?";
 var twitterUrl = "https://twitter.com/intent/tweet";
 /*var serviceUrl = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=";*/
 
 function setLoading(loading) {
-    $("#newquote > i").toggleClass("fa-spin", $(loading));
-    $("#circle").fadeTo(1500, loading ? 0.5 : 1);
-
     $("button").prop("disabled", loading);
+    $("#newquote > i").toggleClass("fa-spin", $(loading));
 }
 
 function loadRandomQuote() {
@@ -24,8 +22,7 @@ function loadRandomQuote() {
     else {
       $.getJSON(serviceUrl)
           .done(function(data) {
-              var quote = $(data[0].content).text(); /* inside a <p> tag */
-              setQuote($('<p/>').html(data[0].title).text(), quote); /* html-encoded string */
+              setQuote(data.quoteAuthor, data.quoteText);
               setLoading(false);
           })
           .fail(function(response) {
