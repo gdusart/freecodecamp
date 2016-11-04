@@ -13,9 +13,9 @@ $(document).ready(function() {
     });
 
     /** Add links on portfolioimg */
-    $('.portfolioimg').each(function() {
+    /*$('.portfolioimg').each(function() {
         $(this).wrap("<a href='http://www.google.com' target='_blank'></a>")
-    });
+    });*/
 });
 
 /* Set appropriate layout on menu items by toggling selected state */
