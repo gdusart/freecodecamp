@@ -235,7 +235,7 @@ function jsonFlickrApi(response) {
 
 function saveSettings() {
   currentstate.gapikey = $("#gapikey").attr("value");
-  currentstate.unit = $("celsiusCheckbox").prop("checked") ? "metric" : "imperial";
+  currentstate.units = $("celsiusCheckbox").prop("checked") ? "metric" : "imperial";
   getBrowserLocation(); /* force reload, will call google API */
 }
 

@@ -115,7 +115,8 @@ City picture component
 }
 
 .weathercomponent .weather {
-  padding-top: 2em;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
 .weathercomponent .valuecolumn {
@@ -133,13 +134,6 @@ City picture component
   text-align: center;
 }
 
-.weathercomponent .windicon {
-  font-size: 400%;
-  display: block;
-  clear: both;
-  text-align: right;
-}
-
 .weathercomponent span {
   display:block;
   clear: both;
@@ -155,8 +149,13 @@ City picture component
   text-transform: uppercase;;
 }
 
+/* Todo: clean */
 .weathercomponent .windicon {
-    font-size: 7em;
+    margin-top: 10%;
+    display: block;
+    clear: both;
+    text-align: right;
+    font-size: 700%;
     display: block;
     clear: both;
     text-align: center;
@@ -230,14 +229,32 @@ City picture component
   }
 
   .citypicture img {
-    max-height: 20em;;
+    max-height: 20em;
   }
 
-  .weathercomponent .weather {
-    margin-top: 2em;
+  .weathercomponent .windicon {
+    margin-top: 1%;
+  }
+}
+
+@media screen and (max-height: 700px) and (min-width: 1200px) {
+  .sidepanel {
+    height: 32em;
+  }
+
+  .citypicture img {
+    max-height: 25em;
+  }
+
+  .sidepanel {
+    margin-top: 0.5%
   }
 
   .settingscomponent {
-    margin-top: 0.3em;
+    margin-top: 1%;
+  }
+
+  .weathercomponent .windicon {
+    margin-top: 1%;
   }
 }
