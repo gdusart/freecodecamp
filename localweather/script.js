@@ -1,4 +1,4 @@
-var iplocation_url = "http://ip-api.com/json";
+var iplocation_url = "https://freegeoip.net/json?callback=?";
 var weather_api = "http://api.openweathermap.org/data/2.5/weather?callback=?"
 var weather_api_key = "c3a98685120384f743a7da3e02611c45";
 var flickr_api = "https://api.flickr.com/services/rest/?method=flickr.photos.search&callback=?"
@@ -62,8 +62,8 @@ Calls external IP to get location based on IP
 */
 function getIPLocation() {
     $.getJSON(iplocation_url, function(data) {
-      currentstate.lat = data.lat;
-      currentstate.lon = data.lon;
+      currentstate.lat = data.latitude;
+      currentstate.lon = data.longitude;
       currentstate.city = data.city;
       onLocationUpdated();
     });
