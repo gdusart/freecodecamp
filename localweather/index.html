@@ -12,7 +12,10 @@
     <title>gdusart random quote</title>
 
     <link rel="icon" type="image/png" href="http://github.com/favicon.ico" />
+
+    <!-- Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" rel="stylesheet"/>
 
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -33,7 +36,7 @@
 <body>
     <div class="container" id="maincontainer">
         <div class="span12" id="infos">
-            <div class="col-xs-6" id="locationpanel">
+            <div class="col-xs-5" id="locationpanel">
                 <div class="citycomponent">
                     <div>
                         <span>
@@ -43,12 +46,18 @@
                     </div>
                 </div>
                 <div class="citypicture">
-                    <img src="" id="citypicture" />
+                  <!--TMP image url for test -->
+                    <img src="http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg" id="citypicture" />
                 </div>
             </div>
         </div>
-        <div class="col-xs-6" id="weatherpanel">
-            <span id="weather"></span>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-5" id="weatherpanel">
+            <div class="weathercomponent">
+              <i class="wi wi-night-sleet" id="weathericon" title=""></i>
+              <span id="weather"></span>
+            </div>
+
         </div>
     </div>
     </div>

@@ -1,13 +1,21 @@
 /**
 TODO: center city + button vertically block
+TODO: this pic doesn' fit well: http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg
+TODO: the precision of location is not always the same (street), check where to find the appropriate precision
+      so that the adresse is not too long (no need to have streets, city is enough)
 */
 
-
+html, body {
+    width: 100%;
+    height: 100%;
+}
 
 body {
+    width: 100%;
+    height: 100%;
     background-image: url("img/background.jpg");
     background-position: left top;
-    background-repeat: no-repeat;
+    background-repeat: space;
     background-size: cover;
     background-color: rgba(64, 64, 64, 1);
     background-size: cover;
@@ -63,9 +71,8 @@ Components part, should be overriden, not modified directly
 **************************************************/
 .citycomponent {
     margin-top: 2em;
-    margin-bottom: 2em;
+    margin-bottom: 3.2em;
 
-    text-align: left;
     color: white;
 
     /* center the content */
@@ -76,8 +83,15 @@ Components part, should be overriden, not modified directly
 
 /* Refine location button */
 .citycomponent .fa {
-    font-size: 2.5em;la drog
+    font-size: 2.5em;
     transition: all 2s ease;
+}
+
+/* grow on hover */
+.citycomponent .fa:hover {
+  transform:scale(1.25);
+  color: red;
+  cursor: pointer;
 }
 
 /* vertical align city and button */
@@ -92,27 +106,55 @@ div.citycomponent > div > span {
     margin-right: 1em;
 }
 
-/* grow on hover */
-.citycomponent .fa:hover {
-  transform:scale(1.25);
-  color: red;
-  cursor: pointer;
-}
 
 /*************************/
 
 /*************************
 City picture component
 **************************/
+
 .citypicture {
-  width: 30em;
-  height: 20em;
+  max-width: 100%;
+  max-height: 100%;
+
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .citypicture img {
-  max-width: 100%;
-  min-width: 100%;
   height: auto;
-  max-height: 100%;
+  max-width: 90%;
+  /* if not set, image will be truncated below */
+  max-height: 20em;
   border-radius: 10%;
+
+  display: block;
+  margin: 0px auto;
+}
+
+/*************************/
+
+/***************************
+/* Weather component
+/***************************/
+.weathercomponent {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right:auto;
+  width: 50%;
+}
+
+.weathercomponent .wi {
+  font-size: 7em;
+  display: block;
+  clear: both;
+  text-align: center;
+}
+
+.weathercomponent span {
+  display:block;
+  clear: both;
+  margin-top: 2em;
+  text-align: center
 }

@@ -85,7 +85,7 @@ function getBrowserLocation() {
               var geocoder = new google.maps.Geocoder;
 
               geocoder.geocode({'location': latlng}, function(results, status) {
-                currentstate.city = results[1].formatted_address;
+                currentstate.city = results[0].address_components[1].short_name;
                 onLocationUpdated();
               });
             }
@@ -142,7 +142,10 @@ function refreshPictures() {
 }
 
 function onWeatherLoaded(data) {
-    $("#weather").text(data.weather[0].main);
+    $("#weathericon").removeClass(); /* reset icon */
+    $("#weathericon").addClass("wi wi-owm-" + data.weather[0].id);
+
+    $("#weather").text(data.weather[0].description);
 }
 
 function onPicturesLoaded(data) {
