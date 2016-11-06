@@ -15,15 +15,19 @@
 
     <!-- Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" rel="stylesheet" />
 
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <!-- Bootbox: easy modal dialogs / alerts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
     <!-- Google api for geocoding -->
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -41,26 +45,61 @@
                     <div>
                         <span>
                           <span id="location"></span>
-                          <i class="fa fa-dot-circle-o" id="locationbutton" title="refine location"></i>
+                        <i class="fa fa-dot-circle-o" id="locationbutton" title="refine location"></i>
                         </span>
                     </div>
                 </div>
                 <div class="citypicture">
-                  <!--TMP image url for test -->
+                    <!--TMP image url for test -->
                     <img src="http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg" id="citypicture" />
                 </div>
             </div>
-        </div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-5" id="weatherpanel">
-            <div class="weathercomponent">
-              <i class="wi wi-night-sleet" id="weathericon" title=""></i>
-              <span id="weather"></span>
-            </div>
 
+            <div class="col-xs-2"></div>
+            <div class="col-xs-5" id="weatherpanel">
+                <div class="weathercomponent">
+                    <i class="wi wi-night-sleet" id="weathericon" title=""></i>
+                    <span id="weather"></span>
+                </div>
+            </div>
+        </div>
+        <div class="span12">
+            <div class="col-xs-12">
+                <div class="settingscomponent">
+                    <div>
+                        <span>
+                <i class="fa fa-cog" id="settingsbutton" title="Open settings" data-toggle="modal" data-target="#settingsdialog"></i>
+                <span>Settings</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="modal fade" id="settingsdialog" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  <i class="fa fa-times-circle" aria-hidden="true" id="settingsclosebutton"></i>
+                </button>
+                <h4 class="modal-title">Settings</h4>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <form>
+                    <label for="googleapikey"> Google API key</label>
+                    <input class="form-control" id="gapikey" aria-describedby="keyHelp" placeholder="Google API key" style="margin: 0 auto; width:40em">
+                    <small id="keyHelp" class="form-text text-muted">A google api key is required for fine location</small>
+
+                    <button type="submit" style="margin-top: 2em" data-dismiss="modal" class="btn btn-primary center-block">Save</button>
+                </form>
+            </div>
+        </div>
     </div>
+  </div>
+
+</div>
 </body>
 
 <script>

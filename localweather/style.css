@@ -1,8 +1,6 @@
 /**
 TODO: center city + button vertically block
 TODO: this pic doesn' fit well: http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg
-TODO: the precision of location is not always the same (street), check where to find the appropriate precision
-      so that the adresse is not too long (no need to have streets, city is enough)
 */
 
 html, body {
@@ -90,7 +88,7 @@ Components part, should be overriden, not modified directly
 /* grow on hover */
 .citycomponent .fa:hover {
   transform:scale(1.25);
-  color: red;
+  color: rgba(194,0,0,0.65);
   cursor: pointer;
 }
 
@@ -157,4 +155,47 @@ City picture component
   clear: both;
   margin-top: 2em;
   text-align: center
+}
+
+/***************************
+/* Settings component
+/***************************/
+.settingscomponent {
+  color: white;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right:auto;
+  width: 50%;
+}
+
+.settingscomponent > span {
+  display:flex;
+  align-items: center;
+  width: 20em;
+}
+
+.settingscomponent .fa {
+  font-size: 2em;
+  transition: all 2s ease;
+}
+
+/* grow on hover */
+.settingscomponent .fa:hover {
+  transform:scale(1.50);
+  color: rgba(194,0,0,0.65);
+  cursor: pointer;
+}
+
+.settingscomponent span {
+  display:block;
+  clear: both;
+  margin-top: 2em;
+  text-align: center
+}
+
+/*************************
+/* Settings dialog
+*************************/
+.modal-header {
+  background-color: rgba(194,0,0,0.65);
 }

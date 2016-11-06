@@ -23,7 +23,8 @@ var currentstate = {
   units: "metric",
   appid: weather_api_key,
   pictures: [],
-  pictureindex :0
+  pictureindex :0,
+  gapikey: "test"
 
 }
 
@@ -67,7 +68,16 @@ function getIPLocation() {
       currentstate.city = data.city;
       onLocationUpdated();
     });
-}
+};
+
+function toggleSettings(show) {
+  if (show) {
+    $("#gapikey").attr("value", currentstate.gapikey)
+    $("#settingsmenu").show("drop", 1000);
+  } else {
+    $("#settingsmenu").hide("drop", 1000);
+  }
+};
 
 /**
 Uses browser to get location (more precise)
@@ -79,22 +89,34 @@ function getBrowserLocation() {
         navigator.geolocation.getCurrentPosition(
             /* User accepted */
             function(position) {
-              currentstate.lat = position.coords.latitude;
-              currentstate.lon = position.coords.longitude;
-              var latlng = {lat: parseFloat(currentstate.lat), lng:parseFloat(currentstate.lon)};
-              var geocoder = new google.maps.Geocoder;
+                currentstate.lat = position.coords.latitude;
+                currentstate.lon = position.coords.longitude;
+                var latlng = {
+                    lat: parseFloat(currentstate.lat),
+                    lng: parseFloat(currentstate.lon)
+                };
+                var geocoder = new google.maps.Geocoder;
 
-              geocoder.geocode({'location': latlng}, function(results, status) {
-                /*TODO: error handling */
+                geocoder.geocode({
+                    'location': latlng
+                }, function(results, status) {
+                    /*TODO: error handling */
 
-                var localityComponents = results[0].address_components.filter(function(value, index) {
-                  return value.types.indexOf("locality") != -1;
+                    var localityComponents = results[0].address_components.filter(function(value, index) {
+                        return value.types.indexOf("locality") != -1;
+                    });
+                    currentstate.city = localityComponents[0].long_name;
+                    onLocationUpdated();
                 });
-                currentstate.city = localityComponents[0].long_name;
-                onLocationUpdated();
-              });
+            },
+
+            /* Handle error */
+            function() {
+                bootbox.alert({
+                  message: "Browser location is disabled",
+                  size: "small"});
             }
-          );
+        );
     }
 };
 
