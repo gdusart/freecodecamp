@@ -14,11 +14,17 @@ $(function() {
     closeButton: false
   });*/
 
+  /* Load atom livereload script for DEV only */
+  if (isLocal()) {
+      $.getScript("http://localhost:35729/livereload.js");
+  }
+
   getIPLocation();
 
   /* init settings pane */
   $("#gapikey").attr("value", currentstate.gapikey);
   $("#celsiusCheckbox").prop("checked", currentstate.units == "metric");
+
 
   $("#locationbutton").click(function() {
     getBrowserLocation();
@@ -34,6 +40,11 @@ $(function() {
   });
 });
 
+/** Check if the page is accessed local (dev) */
+function isLocal() {
+  return location.protocol === "file:";
+}
+
 /** To store the current application state */
 var currentstate = {
   lat: 40.7142,
@@ -44,7 +55,7 @@ var currentstate = {
   pictures: [],
   pictureindex :0,
   /* API key for google API: do NOT put it on git */
-  gapikey: ""
+  gapikey: "",
 
 }
 
@@ -53,7 +64,8 @@ var weather_request = {
   /*lat: */
   /*lon: */
   /*units: */
-  appid: weather_api_key
+  appid: weather_api_key,
+  units: currentstate.units
 }
 
 /**  flickr request properties */
@@ -108,25 +120,29 @@ function getBrowserLocation() {
                 };
                 var geocoder = new google.maps.Geocoder;
 
-                geocoder.geocode({
-                    'location': latlng
-                }, function(results, status) {
-                    /*TODO: error handling */
+                /**
+                If Google API key is not provided and we are not in dev mode
+                Fallback to IP location mode
+                */
+                if (currentstate.gapikey == "" && !isLocal()) {
+                  getIPLocation();
+                } else {
+                  geocoder.geocode({
+                      'location': latlng
+                  }, function(results, status) {
 
-                    var localityComponents = results[0].address_components.filter(function(value, index) {
-                        return value.types.indexOf("locality") != -1;
-                    });
-                    currentstate.city = localityComponents[0].long_name;
-                    onLocationUpdated();
-                });
+                      var localityComponents = results[0].address_components.filter(function(value, index) {
+                          return value.types.indexOf("locality") != -1;
+                      });
+                      currentstate.city = localityComponents[0].long_name;
+                      onLocationUpdated();
+                  });
+                }
             },
 
             /* Handle error */
             function() {
-                bootbox.alert({
-                  message: "Browser location is disabled",
-                  size: "small",
-                  closeButton: "false"});
+                getIPLocation();
             }
         );
     }
@@ -146,7 +162,7 @@ function onLocationUpdated() {
 function refreshWeather() {
     weather_request.lat = currentstate.lat;
     weather_request.lon = currentstate.lon;
-    weather_request.unit = currentstate.unit;
+    weather_request.units = currentstate.units;
 
     $.getJSON(weather_api, weather_request)
         .done(function(data) {
@@ -185,7 +201,7 @@ function onWeatherLoaded(data) {
     $("#weathericon").addClass("weathericon wi wi-owm-" + data.weather[0].id);
 
     $("#weather").text(data.weather[0].description);
-    $("#temperature").text(data.main.temp);
+    $("#temperature").text(data.main.temp + (currentstate.units == "metric" ? "°C" : "°F"));
     $("#humidity").text(data.main.humidity + "%");
     $("#winddirection").addClass("windicon wi wi-wind towards-" + data.wind.deg);
 
@@ -219,7 +235,7 @@ function jsonFlickrApi(response) {
 
 function saveSettings() {
   currentstate.gapikey = $("#gapikey").attr("value");
-  currentstate.unit = $("celsiusCheckbox").prop("checked") ? "metric" : "???";
+  currentstate.unit = $("celsiusCheckbox").prop("checked") ? "metric" : "imperial";
   getBrowserLocation(); /* force reload, will call google API */
 }
 

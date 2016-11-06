@@ -1,6 +1,6 @@
 /**
-TODO: center city + button vertically block
 TODO: this pic doesn' fit well: http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg
+TODO: media queries + bootstrap handling for portait + phones
 */
 
 html, body {
@@ -27,22 +27,23 @@ PANELS
 ********/
 #maincontainer {
   width: 85%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidepanel {
+  margin-top: 10%;
+  overflow: hidden;
+  border-radius: 20%;
+  height: 40em;
 }
 
 #weatherpanel {
     background-color: rgba(0,0,139,0.1);
-    height: 40em;
-    margin-top: 5em;
-    overflow: hidden;
-    border-radius: 20%;
 }
 
 #locationpanel {
     background-color: rgba(255,0,0,0.1);
-    height: 40em;
-    margin-top: 5em;
-    overflow:hidden;
-    border-radius: 20%;
 }
 
 /** Add effects when image changes */
@@ -50,17 +51,9 @@ PANELS
     transition:opacity 3s ease-in-out;
 }
 
-
-#locationbutton {}
-
-#location {}
-
-#weather {}
-
-
-#infos {}
-
-#images {}
+#locationbutton {
+  cursor: pointer;
+}
 
 #settingsdialog {
   top: 20%;
@@ -75,41 +68,17 @@ Components part, should be overriden, not modified directly
 * City component
 * Displays city title + button to refine location
 **************************************************/
-.citycomponent {
+.locationcomponent {
     margin-top: 2em;
-    margin-bottom: 3.2em;
-
-    color: white;
-
-    /* center the content */
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    height: 85%;
+    padding-bottom: 10%;
 }
 
-/* Refine location button */
-.citycomponent .fa {
-    font-size: 2.5em;
-    transition: all 2s ease;
-}
-
-/* grow on hover */
-.citycomponent .fa:hover {
-  transform:scale(1.25);
-  color: rgba(194,0,0,0.65);
-  cursor: pointer;
-}
-
-/* vertical align city and button */
-div.citycomponent > div > span {
-  display: flex;
-  align-items: center;
-  width: 20em; /** some space for long city names */
-}
-
-/* city name */
-.citycomponent > div > span > span {
-    margin-right: 1em;
+.locationcomponent .city_row {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+  padding-bottom: 1em;
 }
 
 
@@ -121,10 +90,6 @@ City picture component
 .citypicture {
   max-width: 100%;
   max-height: 100%;
-
-  width: 95%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .citypicture img {
@@ -144,10 +109,9 @@ City picture component
 /* Weather component
 /***************************/
 .weathercomponent {
-  margin-top: 15%;
-  margin-left: auto;
-  margin-right:auto;
-  width: 50%;
+  margin-top: 2em;
+  height: 85%;
+  padding-bottom: 10%;
 }
 
 .weathercomponent .weather_row {
@@ -155,14 +119,14 @@ City picture component
 }
 
 .weathercomponent .weathericon {
-  font-size: 7em;
+  font-size: 750%;
   display: block;
   clear: both;
   text-align: center;
 }
 
 .weathercomponent .windicon {
-  font-size: 4em;
+  font-size: 400%;
   display: block;
   clear: both;
   text-align: right;
@@ -171,7 +135,6 @@ City picture component
 .weathercomponent span {
   display:block;
   clear: both;
-  margin-top: 2em;
   text-align: center
 }
 
@@ -229,7 +192,6 @@ City picture component
 .settingscomponent span {
   display:block;
   clear: both;
-  margin-top: 1em;
   text-align: center;
   font-size: 1.2em;
 }
@@ -250,4 +212,24 @@ City picture component
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch
 .bootstrap-switch-handle-off.bootstrap-switch-primary {
     background-color: rgba(194,0,0,0.65);
+}
+
+/**** Media queries ***/
+@media screen and (max-height: 700px) {
+  .sidepanel {
+    margin-top: 2.5%;
+    height: 30em;
+  }
+
+  .citypicture img {
+    max-height: 20em;;
+  }
+
+  .weathercomponent .weather {
+    margin-top: 2em;
+  }
+
+  .settingscomponent {
+    margin-top: 0.3em;
+  }
 }

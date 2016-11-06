@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>gdusart random quote</title>
+    <title>FCC: gdusart local weather</title>
 
     <link rel="icon" type="image/png" href="http://github.com/favicon.ico" />
 
@@ -43,68 +43,81 @@
 </head>
 
 <body>
-    <div class="container" id="maincontainer">
-        <div class="span12" id="infos">
-            <div class="col-xs-5" id="locationpanel">
-                <div class="citycomponent">
-                    <div>
-                        <span>
-                          <span id="location"></span>
-                        <i class="fa fa-dot-circle-o" id="locationbutton" title="refine location"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="citypicture">
-                    <!--TMP image url for test -->
-                    <img src="http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg" id="citypicture" />
-                </div>
-            </div>
+    <div class="container-fluid" id="maincontainer">
+        <div class="row">
 
-            <div class="col-xs-2"></div>
-            <div class="col-xs-5" id="weatherpanel">
-                <div class="weathercomponent">
-                    <div class="row weather_row">
-                        <div class="col-xs-12">
-                            <i class="wi wi-night-sleet weathericon" id="weathericon" title=""></i>
-                            <span id="weather" class="weather"></span>
+            <!-- Split 12 columns : 5 - 2 - 5 -->
+            <div class="col-xs-12">
+
+                <!-- Left part -->
+                <div class="col-xs-5 sidepanel" id="locationpanel">
+                    <div class="locationcomponent">
+                        <div class="row city_row">
+                            <div class="col-xs-12">
+                                <span id="locationbutton" title="Refresh">
+                        <span id="location"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row picture_row">
+                            <div class="col-xs-12">
+                                <div class="citypicture">
+                                    <!--TMP image url for test -->
+                                    <img src="http://farm9.static.flickr.com/8385/29654863241_cd560b932c_h.jpg" id="citypicture" />
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row temperature_row">
-                      <div class="col-xs-5">
-                        <span>Temperature</span>
-                      </div>
-                      <div class="col-xs-7">
-                        <span id="temperature"></span>
-                      </div>
-                    </div>
+                <!-- Empty center part -->
+                <div class="col-xs-2"></div>
 
-                    <div class="row temperature_row">
-                      <div class="col-xs-5">
-                        <span>Humidity</span>
-                      </div>
-                      <div class="col-xs-7">
-                        <span id="humidity"></span>
-                      </div>
-                    </div>
+                <!-- Right part -->
+                <div class="col-xs-5 sidepanel" id="weatherpanel">
+                    <div class="weathercomponent">
+                        <div class="row weather_row">
+                            <div class="col-xs-12">
+                                <i class="wi wi-night-sleet weathericon" id="weathericon" title=""></i>
+                                <span id="weather" class="weather"></span>
+                            </div>
+                        </div>
 
-                    <div class="row wind_row">
-                      <div class="col-xs-12">
-                        <span id="windspeed"></span>
-                        <i id="winddirection" class="windicon" title=""></i>
-                      </div>
+                        <div class="row temperature_row">
+                            <div class="col-xs-5">
+                                <span>Temperature</span>
+                            </div>
+                            <div class="col-xs-7">
+                                <span id="temperature"></span>
+                            </div>
+                        </div>
+
+                        <div class="row temperature_row">
+                            <div class="col-xs-5">
+                                <span>Humidity</span>
+                            </div>
+                            <div class="col-xs-7">
+                                <span id="humidity"></span>
+                            </div>
+                        </div>
+
+                        <div class="row wind_row">
+                            <div class="col-xs-12">
+                                <span id="windspeed"></span>
+                                <i id="winddirection" class="windicon" title=""></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="span12">
+        <div class="row">
             <div class="col-xs-12">
                 <div class="settingscomponent">
                     <div>
                         <span>
-                <i class="fa fa-cog" id="settingsbutton" title="Open settings" data-toggle="modal" data-target="#settingsdialog"></i>
-                <span>Settings</span>
+                      <i class="fa fa-cog" id="settingsbutton" title="Open settings" data-toggle="modal" data-target="#settingsdialog"></i>
+                      <span>Settings</span>
                         </span>
                     </div>
                 </div>
@@ -113,41 +126,33 @@
     </div>
 
     <div class="modal fade" id="settingsdialog" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                   <i class="fa fa-times-circle" aria-hidden="true" id="settingsclosebutton"></i>
                 </button>
-                <h4 class="modal-title">Settings</h4>
-            </div>
-            <div class="modal-body" style="text-align:center">
-                <form>
-                  <div class="form-group">
-                      <label for="googleapikey">Google API key</label>
-                      <input class="form-control" id="gapikey" aria-describedby="keyHelp" placeholder="Google API key" style="margin: 0 auto; width:40em">
-                      <small id="keyHelp" class="form-text text-muted">A google api key is required for fine location</small>
-                  </div>
+                    <h4 class="modal-title">Settings</h4>
+                </div>
+                <div class="modal-body" style="text-align:center">
+                    <form>
+                        <div class="form-group">
+                            <label for="googleapikey">Google API key</label>
+                            <input class="form-control" id="gapikey" aria-describedby="keyHelp" placeholder="Google API key" style="margin: 0 auto; width:40em">
+                            <small id="keyHelp" class="form-text text-muted">A google api key is required for fine location</small>
+                        </div>
 
-                  <div class="form-group">
-                      <label for="celsiusCheckbox">Units</label>
-                      <input type="checkbox" id="celsiusCheckbox" checked>
-                  </div>
+                        <div class="form-group">
+                            <label for="celsiusCheckbox">Units</label>
+                            <input type="checkbox" id="celsiusCheckbox" checked>
+                        </div>
 
-                  <button type="submit" style="margin-top: 2em" data-dismiss="modal" class="btn btn-primary center-block" id="settingsSaveButton">Save</button>
-              </form>
+                        <button type="submit" style="margin-top: 2em" data-dismiss="modal" class="btn btn-primary center-block" id="settingsSaveButton">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-  </div>
-
-</div>
 </body>
-
-<script>
-    if (location.protocol === "file:") {
-        $.getScript("http://localhost:35729/livereload.js");
-    }
-</script>
 
 </html>
