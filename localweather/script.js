@@ -85,7 +85,12 @@ function getBrowserLocation() {
               var geocoder = new google.maps.Geocoder;
 
               geocoder.geocode({'location': latlng}, function(results, status) {
-                currentstate.city = results[0].address_components[1].short_name;
+                /*TODO: error handling */
+
+                var localityComponents = results[0].address_components.filter(function(value, index) {
+                  return value.types.indexOf("locality") != -1;
+                });
+                currentstate.city = localityComponents[0].long_name;
                 onLocationUpdated();
               });
             }
