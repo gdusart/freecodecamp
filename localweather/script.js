@@ -1,27 +1,49 @@
+var iplocation_url = "http://ip-api.com/json";
 var weather_api = "http://api.openweathermap.org/data/2.5/weather?callback=?"
 var weather_api_key = "c3a98685120384f743a7da3e02611c45";
 var flickr_api = "https://api.flickr.com/services/rest/?method=flickr.photos.search&callback=?"
 var flickr_api_key = "273b135f9b33fa4a5583cfe82e4fe098";
-var flickr_img_url = 'http://farm{farm}.static.flickr.com/{server}/{id}_{secret}_z.jpg';
+var flickr_img_url = 'http://farm{farm}.static.flickr.com/{server}/{id}_{secret}_h.jpg';
 
+var currentcity;
+
+$(function() {
+  getIPLocation();
+
+  $("#locationbutton").click(function() {
+    getBrowserLocation();
+  });
+});
+
+/** To store the current application state */
+var currentstate = {
+  lat: 40.7142,
+  lon: -74.00,
+  city: "Arlon",
+  units: "metric",
+  appid: weather_api_key,
+  pictures: [],
+  pictureindex :0
+
+}
 
 /** State object **/
 var weather_request = {
-    lat: 49.61,
-    lon: 6.14,
-    units: "metric",
-    appid: weather_api_key
+  /*lat: */
+  /*lon: */
+  /*units: */
+  appid: weather_api_key
 }
 
+/**  flickr request properties */
 var flickr_request = {
     api_key: '273b135f9b33fa4a5583cfe82e4fe098',
 
-    /* geolocation */
-    lat: weather_request.lat,
-    lon: weather_request.lon,
+    /*city */
+    accuracy: 16,
 
-    /*region*/
-    accuracy: 6,
+    /* for outdoors, but returns nothing ? */
+    //geo_context: 2,
 
     /* Photos only */
     content_type: 1,
@@ -31,93 +53,131 @@ var flickr_request = {
 
     /*outdoors*/
     /*geo_context: 2,*/
-    per_page: 5,
+    per_page: 10,
     format: "json"
 }
 
-$(function() {
-    refreshLocation(); /* default display, before user reply */
-    getLocation();
-});
+/**
+Calls external IP to get location based on IP
+*/
+function getIPLocation() {
+    $.getJSON(iplocation_url, function(data) {
+      currentstate.lat = data.lat;
+      currentstate.lon = data.lon;
+      currentstate.city = data.city;
+      onLocationUpdated();
+    });
+}
 
-function getLocation() {
+/**
+Uses browser to get location (more precise)
+*/
+function getBrowserLocation() {
     //check geolocation available
     if ("geolocation" in navigator) {
         //try to get user current location using getCurrentPosition() method
         navigator.geolocation.getCurrentPosition(
             /* User accepted */
             function(position) {
-                locationUpdated(position.coords.latitude, position.coords.longitude);
+              currentstate.lat = position.coords.latitude;
+              currentstate.lon = position.coords.longitude;
+              var latlng = {lat: parseFloat(currentstate.lat), lng:parseFloat(currentstate.lon)};
+              var geocoder = new google.maps.Geocoder;
+
+              geocoder.geocode({'location': latlng}, function(results, status) {
+                currentstate.city = results[1].formatted_address;
+                onLocationUpdated();
+              });
             }
-        );
-    } else {
-        console.log("Browser doesn't support geolocation, returning Luxembourg location");
-        onLocationLoaded(49.6195512, 6.144647500000019);
+          );
     }
 };
 
 
 function refreshLocation() {
-    $("#location").text(weather_request.lat + " - " + weather_request.lon);
-    refreshWeather();
+    $("#location").text(currentstate.city);
 }
 
-function locationUpdated(lat, lon) {
-    weather_request.lat = lat;
-    weather_request.lon = lon;
-    flickr_request.lat = lat;
-    flickr_request.lon = lon;
-
+function onLocationUpdated() {
+    refreshLocation();
     refreshWeather();
     refreshPictures();
 }
 
 function refreshWeather() {
+    weather_request.lat = currentstate.lat;
+    weather_request.lon = currentstate.lon;
+    weather_request.unit = currentstate.unit;
+
     $.getJSON(weather_api, weather_request)
         .done(function(data) {
-            onWeatherLoaded(JSON.stringify(data));
+            onWeatherLoaded(data);
         })
         .fail(function(error) {
-            alert("fail " + JSON.stringify(error));
+            alert("fail to load weather: " + JSON.stringify(error));
         });
 }
 
+function showNextPicture() {
+  /* Check pictures are available */
+  if (currentstate.pictures.length > 0) {
+    /* end of array ? */
+    if (currentstate.pictureindex >= currentstate.pictures.length) {
+      currentstate.pictureindex = 0;
+    }
+
+    $("#citypicture").css("opacity",0);
+    setTimeout(function() {
+      $("#citypicture").attr("src", currentstate.pictures[currentstate.pictureindex++].link);
+      $("#citypicture").css("opacity",1);}, 2000);
+    }
+
+}
+
 function refreshPictures() {
+    flickr_request.lat = currentstate.lat;
+    flickr_request.lon = currentstate.lon;
     $.getJSON(flickr_api, flickr_request)
-        .done(function(data) {} /* Handled by JSONP callback jsonFlickrApi */
-        /*.fail(function(error) {
-            alert("fail to load pictures " + JSON.stringify(error));
-        }*/
-       );
+        .done(function(data) {} /* Handled by JSONP callback jsonFlickrApi */ );
 }
 
 function onWeatherLoaded(data) {
-    $("#weather").text(data);
+    $("#weather").text(data.weather[0].main);
 }
 
 function onPicturesLoaded(data) {
-$("#json").text(JSON.stringify(data));
-
-  $("#pictures").empty();
-  $.each(data, function(index, value) {
-    $("#pictures").append($("<img/>", {src: value.link, alt: value.description, width: "300px"}));
-
-  });
+  currentstate.pictureindex = 0;
+  currentstate.pictures = data;
+  showNextPicture();
 }
 
 /** Will handle JSONP reply from flickr */
 function jsonFlickrApi(response) {
-  if (response.stat == "ok") {
-    var mapped = $.map(response.photos.photo, function(elt){
-      return {
-        // replace each {key} with its value
-        link: flickr_img_url.replace(/({)([\w\-]+)(})/gi, function(str, p1, p2) {return elt[p2];}),
-        description: elt.title
-      };
-    });
-  } else {
-    return [];
-  }
+    if (response.stat == "ok") {
+        var mapped = $.map(response.photos.photo, function(elt) {
+            return {
+                // replace each {key} with its value
+                link: flickr_img_url.replace(/({)([\w\-]+)(})/gi, function(str, p1, p2) {
+                    return elt[p2];
+                }),
+                description: elt.title
+            };
+        });
+    } else {
+        return [];
+    }
 
-   onPicturesLoaded(mapped);
+    onPicturesLoaded(mapped);
 }
+
+/* disable cache for ajax calls */
+$.ajax({
+    cache: false,
+});
+
+/* Change image every 5 second */
+$(function() {
+  setInterval(function() {
+    showNextPicture();
+  }, 15000)
+})

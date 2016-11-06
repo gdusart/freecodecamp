@@ -1,0 +1,118 @@
+/**
+TODO: center city + button vertically block
+*/
+
+
+
+body {
+    background-image: url("img/background.jpg");
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(64, 64, 64, 1);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+
+/*******
+PANELS
+********/
+#weatherpanel {
+    background-color: rgba(0,0,139,0.1);
+    height: 30em;
+    margin-top: 5em;
+    overflow: hidden;
+    border-radius: 20%;
+}
+
+#locationpanel {
+    background-color: rgba(255,0,0,0.1);
+    height: 30em;
+    margin-top: 5em;
+    overflow:hidden;
+    border-radius: 20%;
+}
+
+/** Add effects when image changes */
+#citypicture {
+    transition:opacity 3s ease-in-out;
+}
+
+
+#locationbutton {}
+
+#location {}
+
+#weather {}
+
+
+#infos {}
+
+#images {}
+
+/************************************************************
+Components part, should be overriden, not modified directly
+/************************************************************
+
+
+/*************************************************
+* City component
+* Displays city title + button to refine location
+**************************************************/
+.citycomponent {
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    text-align: left;
+    color: white;
+
+    /* center the content */
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/* Refine location button */
+.citycomponent .fa {
+    font-size: 2.5em;la drog
+    transition: all 2s ease;
+}
+
+/* vertical align city and button */
+div.citycomponent > div > span {
+  display: flex;
+  align-items: center;
+  width: 20em; /** some space for long city names */
+}
+
+/* city name */
+.citycomponent > div > span > span {
+    margin-right: 1em;
+}
+
+/* grow on hover */
+.citycomponent .fa:hover {
+  transform:scale(1.25);
+  color: red;
+  cursor: pointer;
+}
+
+/*************************/
+
+/*************************
+City picture component
+**************************/
+.citypicture {
+  width: 30em;
+  height: 20em;
+}
+
+.citypicture img {
+  max-width: 100%;
+  min-width: 100%;
+  height: auto;
+  max-height: 100%;
+  border-radius: 10%;
+}
