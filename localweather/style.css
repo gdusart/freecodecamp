@@ -25,9 +25,13 @@ body {
 /*******
 PANELS
 ********/
+#maincontainer {
+  width: 85%;
+}
+
 #weatherpanel {
     background-color: rgba(0,0,139,0.1);
-    height: 30em;
+    height: 40em;
     margin-top: 5em;
     overflow: hidden;
     border-radius: 20%;
@@ -35,7 +39,7 @@ PANELS
 
 #locationpanel {
     background-color: rgba(255,0,0,0.1);
-    height: 30em;
+    height: 40em;
     margin-top: 5em;
     overflow:hidden;
     border-radius: 20%;
@@ -57,6 +61,10 @@ PANELS
 #infos {}
 
 #images {}
+
+#settingsdialog {
+  top: 20%;
+}
 
 /************************************************************
 Components part, should be overriden, not modified directly
@@ -110,12 +118,11 @@ div.citycomponent > div > span {
 /*************************
 City picture component
 **************************/
-
 .citypicture {
   max-width: 100%;
   max-height: 100%;
 
-  width: 80%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -124,7 +131,7 @@ City picture component
   height: auto;
   max-width: 90%;
   /* if not set, image will be truncated below */
-  max-height: 20em;
+  max-height: 30em;
   border-radius: 10%;
 
   display: block;
@@ -137,17 +144,28 @@ City picture component
 /* Weather component
 /***************************/
 .weathercomponent {
-  margin-top: 2em;
+  margin-top: 15%;
   margin-left: auto;
   margin-right:auto;
   width: 50%;
 }
 
-.weathercomponent .wi {
+.weathercomponent .weather_row {
+  padding-bottom: 1em;
+}
+
+.weathercomponent .weathericon {
   font-size: 7em;
   display: block;
   clear: both;
   text-align: center;
+}
+
+.weathercomponent .windicon {
+  font-size: 4em;
+  display: block;
+  clear: both;
+  text-align: right;
 }
 
 .weathercomponent span {
@@ -155,6 +173,30 @@ City picture component
   clear: both;
   margin-top: 2em;
   text-align: center
+}
+
+.weathercomponent .wind_row {
+  margin-top: 2em;
+}
+
+.weathercomponent .weather {
+  font-size: 1.2em;
+  text-transform: uppercase;;
+}
+
+.weathercomponent .windicon {
+    font-size: 7em;
+    display: block;
+    clear: both;
+    text-align: center;
+}
+
+.temperature_row div {
+  font-weight: bold;
+}
+
+.temperature_row span {
+  text-align: right;
 }
 
 /***************************
@@ -165,17 +207,15 @@ City picture component
   margin-top: 2em;
   margin-left: auto;
   margin-right:auto;
-  width: 50%;
 }
 
 .settingscomponent > span {
   display:flex;
   align-items: center;
-  width: 20em;
 }
 
 .settingscomponent .fa {
-  font-size: 2em;
+  font-size: 5em;
   transition: all 2s ease;
 }
 
@@ -189,13 +229,25 @@ City picture component
 .settingscomponent span {
   display:block;
   clear: both;
-  margin-top: 2em;
-  text-align: center
+  margin-top: 1em;
+  text-align: center;
+  font-size: 1.2em;
 }
 
 /*************************
 /* Settings dialog
 *************************/
+#settingsdialog label {
+  /** force label on top of field */
+  display: block;
+}
+
 .modal-header {
   background-color: rgba(194,0,0,0.65);
+}
+
+/** Color override for bootstrap-switch */
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary, .bootstrap-switch
+.bootstrap-switch-handle-off.bootstrap-switch-primary {
+    background-color: rgba(194,0,0,0.65);
 }

@@ -5,13 +5,32 @@ var flickr_api = "https://api.flickr.com/services/rest/?method=flickr.photos.sea
 var flickr_api_key = "273b135f9b33fa4a5583cfe82e4fe098";
 var flickr_img_url = 'http://farm{farm}.static.flickr.com/{server}/{id}_{secret}_h.jpg';
 
-var currentcity;
+var pleasewait
 
 $(function() {
+  /*
+  pleasewait = bootbox.dialog({
+    message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>',
+    closeButton: false
+  });*/
+
   getIPLocation();
+
+  /* init settings pane */
+  $("#gapikey").attr("value", currentstate.gapikey);
+  $("#celsiusCheckbox").prop("checked", currentstate.units == "metric");
 
   $("#locationbutton").click(function() {
     getBrowserLocation();
+  });
+
+  $("#settingsSaveButton").click(function() {
+    saveSettings();
+  })
+
+  $("#celsiusCheckbox").bootstrapSwitch({
+    onText: "C",
+    offText: "F"
   });
 });
 
@@ -24,7 +43,8 @@ var currentstate = {
   appid: weather_api_key,
   pictures: [],
   pictureindex :0,
-  gapikey: "test"
+  /* API key for google API: do NOT put it on git */
+  gapikey: ""
 
 }
 
@@ -70,15 +90,6 @@ function getIPLocation() {
     });
 };
 
-function toggleSettings(show) {
-  if (show) {
-    $("#gapikey").attr("value", currentstate.gapikey)
-    $("#settingsmenu").show("drop", 1000);
-  } else {
-    $("#settingsmenu").hide("drop", 1000);
-  }
-};
-
 /**
 Uses browser to get location (more precise)
 */
@@ -114,7 +125,8 @@ function getBrowserLocation() {
             function() {
                 bootbox.alert({
                   message: "Browser location is disabled",
-                  size: "small"});
+                  size: "small",
+                  closeButton: "false"});
             }
         );
     }
@@ -170,9 +182,14 @@ function refreshPictures() {
 
 function onWeatherLoaded(data) {
     $("#weathericon").removeClass(); /* reset icon */
-    $("#weathericon").addClass("wi wi-owm-" + data.weather[0].id);
+    $("#weathericon").addClass("weathericon wi wi-owm-" + data.weather[0].id);
 
     $("#weather").text(data.weather[0].description);
+    $("#temperature").text(data.main.temp);
+    $("#humidity").text(data.main.humidity + "%");
+    $("#winddirection").addClass("windicon wi wi-wind towards-" + data.wind.deg);
+
+    /* TODO: wind */
 }
 
 function onPicturesLoaded(data) {
@@ -198,6 +215,12 @@ function jsonFlickrApi(response) {
     }
 
     onPicturesLoaded(mapped);
+}
+
+function saveSettings() {
+  currentstate.gapikey = $("#gapikey").attr("value");
+  currentstate.unit = $("celsiusCheckbox").prop("checked") ? "metric" : "???";
+  getBrowserLocation(); /* force reload, will call google API */
 }
 
 /* disable cache for ajax calls */
