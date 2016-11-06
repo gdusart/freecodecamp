@@ -114,6 +114,14 @@ City picture component
   padding-bottom: 10%;
 }
 
+.weathercomponent .weather {
+  padding-top: 2em;
+}
+
+.weathercomponent .valuecolumn {
+  text-align: left;
+}
+
 .weathercomponent .weather_row {
   padding-bottom: 1em;
 }
