@@ -1,3 +1,9 @@
+/*
+TODO: add link on weather icon to open owm page
+TODO: add configuration option for number of images and refresh delay
+TODO: wait screen
+*/
+
 var iplocation_url = "https://freegeoip.net/json?callback=?";
 var weather_api = "http://api.openweathermap.org/data/2.5/weather?callback=?"
 var weather_api_key = "c3a98685120384f743a7da3e02611c45";
@@ -5,7 +11,7 @@ var flickr_api = "https://api.flickr.com/services/rest/?method=flickr.photos.sea
 var flickr_api_key = "273b135f9b33fa4a5583cfe82e4fe098";
 var flickr_img_url = 'http://farm{farm}.static.flickr.com/{server}/{id}_{secret}_h.jpg';
 
-var pleasewait
+/*var pleasewait*/
 
 $(function() {
   /*
@@ -25,7 +31,6 @@ $(function() {
   $("#gapikey").attr("value", currentstate.gapikey);
   $("#celsiusCheckbox").prop("checked", currentstate.units == "metric");
 
-
   $("#locationbutton").click(function() {
     getBrowserLocation();
   });
@@ -38,6 +43,10 @@ $(function() {
     onText: "C",
     offText: "F"
   });
+
+  setInterval(function() {
+    showNextPicture();
+  }, currentstate.refreshinterval);
 });
 
 /** Check if the page is accessed local (dev) */
@@ -53,10 +62,12 @@ var currentstate = {
   units: "metric",
   appid: weather_api_key,
   pictures: [],
-  pictureindex :0,
   /* API key for google API: do NOT put it on git */
   gapikey: "",
+  imagecount: 50,
 
+  /* 10 seconds */
+  refreshinterval: 10000
 }
 
 /** State object **/
@@ -86,7 +97,7 @@ var flickr_request = {
 
     /*outdoors*/
     /*geo_context: 2,*/
-    per_page: 10,
+    per_page: currentstate.imagecount,
     format: "json"
 }
 
@@ -176,14 +187,13 @@ function refreshWeather() {
 function showNextPicture() {
   /* Check pictures are available */
   if (currentstate.pictures.length > 0) {
-    /* end of array ? */
-    if (currentstate.pictureindex >= currentstate.pictures.length) {
-      currentstate.pictureindex = 0;
-    }
+
+    /* from 0 to array size -1 */
+    var rand = Math.floor((Math.random() * (currentstate.pictures.length)));
 
     $("#citypicture").css("opacity",0);
     setTimeout(function() {
-      $("#citypicture").attr("src", currentstate.pictures[currentstate.pictureindex++].link);
+      $("#citypicture").attr("src", currentstate.pictures[rand].link);
       $("#citypicture").css("opacity",1);}, 2000);
     }
 
@@ -243,10 +253,3 @@ function saveSettings() {
 $.ajax({
     cache: false,
 });
-
-/* Change image every 5 second */
-$(function() {
-  setInterval(function() {
-    showNextPicture();
-  }, 15000)
-})
