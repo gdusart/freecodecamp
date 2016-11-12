@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100;
-  background-color: rgb(11, 44, 96);
+  background-image: url(background.png);
 }
 
 .container {
@@ -13,14 +13,43 @@ html, body {
 
 #searchRow {
   text-align: center;
-  padding-top: 20%;
 }
 
 #buttonsRow {
-  padding-top: 2%;
   text-align: center;
 }
 
+#titlerow {
+  color: black;
+  font-family: 'Pacifico', cursive;
+  font-size: 5em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
 .article {
-  color:white;
+  color:black;
+  margin-top: 1em;
+}
+
+.article .titlerow {
+  margin-top: 1em;
+}
+
+.article .descrow {
+  margin-top: 1em;
+}
+
+.article .title {
+  font-weight: bold;
+}
+
+.article .picture {
+  float: left;
+  padding-right: 1em;
+}
+
+.article .picture img {
+  max-width: 10em;
+  max-height: 10em;
 }

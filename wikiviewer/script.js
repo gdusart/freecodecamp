@@ -29,7 +29,8 @@ function showResults(results) {
   var mapped = results.map(function(val) {
       var result = {
         title: val.title,
-        summary: val.extract
+        summary: val.extract,
+        pagelink: val.fullurl
       };
 
       if (val.thumbnail) {
@@ -51,9 +52,11 @@ function search(keyword) {
     format: "json",
     generator: "search",
     gsrnamespace: 0, /* articles */
-    gsrlimit: 10, /* max 10 items */
+    gsrlimit: 8, /* max  8 items */
     pilimit: "max",
-    prop: "pageimages|extracts",
+    pithumbsize: 200,
+    prop: "pageimages|extracts|info",
+    inprop: "url", /* to load page URL */
     formatversion: 2,
     exintro: 1,
     explaintext: 1,
